@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -57,7 +58,7 @@ class ProfilePage extends StatelessWidget {
                   child: MainButton(
                     text: 'Logout',
                     onPressed: () {
-                      // Handle logout action
+                      context.go('/signin');
                     },
                   ),
                 ),
