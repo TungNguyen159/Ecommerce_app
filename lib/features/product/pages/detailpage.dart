@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/data/datasources/remote/apiservice.dart';
 import 'package:shop_app/data/models/product_model.dart';
-import 'package:shop_app/features/product/presentation/pages/profile_page.dart';
+import 'package:shop_app/features/product/pages/profile_page.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key, required this.productId});

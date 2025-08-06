@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/components/text_field_app.dart';
-import 'package:shop_app/features/product/presentation/pages/profile_page.dart';
+import 'package:shop_app/features/product/pages/profile_page.dart';
 
-class Signuppage extends StatelessWidget {
-  const Signuppage({super.key});
+class Signinpage extends StatelessWidget {
+  const Signinpage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +37,7 @@ class Signuppage extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 15),
-                // Username
-                TextFieldApp(
-                  hintText: 'Username',
-                  prefixIcon: const Icon(Icons.person_outline),
-                  textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your username';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 15),
+
                 // Password
                 TextFieldApp(
                   hintText: 'Password',
@@ -63,29 +51,30 @@ class Signuppage extends StatelessWidget {
                     return null;
                   },
                 ),
-                const SizedBox(height: 15),
-                // Confirm Password
-                TextFieldApp(
-                  hintText: 'Confirm Password',
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  obscureText: true,
-                  textInputAction: TextInputAction.done,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
-                    }
-                    return null;
-                  },
+
+                // Forgot password
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      context.go('/forgot');
+                    },
+                    child: const Text(
+                      "Forgot Password?",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 20),
-                // Sign up button
+                const SizedBox(height: 10),
+
+                // Sign in button
                 MainButton(
-                  text: 'Sign Up',
+                  text: 'Sign In',
                   onPressed: () {
                     // if (formKey.currentState!.validate()) {
                     //   context.go('/home');
                     // }
-                    context.go('/signin');
+                    context.go('/splash');
                   },
                 ),
                 const SizedBox(height: 40),
@@ -94,13 +83,13 @@ class Signuppage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Have an account? "),
+                    const Text("Don't have an account? "),
                     GestureDetector(
                       onTap: () {
-                        context.go('/signin');
+                        context.go('/signup');
                       },
                       child: const Text(
-                        "Sign In",
+                        "Sign Up",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.purple,

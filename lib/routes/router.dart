@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:shop_app/features/auth/presentation/pages/forgot_page.dart';
-import 'package:shop_app/features/auth/presentation/pages/signin_page.dart';
-import 'package:shop_app/features/auth/presentation/pages/signup_page.dart';
-import 'package:shop_app/features/cart/presentation/pages/cart_page.dart';
-import 'package:shop_app/features/product/presentation/pages/detailpage.dart';
-import 'package:shop_app/features/product/presentation/pages/notifications.dart';
-import 'package:shop_app/features/product/presentation/pages/product_page.dart';
-import 'package:shop_app/features/product/presentation/pages/profile_page.dart';
+import 'package:shop_app/features/auth/pages/forgot_page.dart';
+import 'package:shop_app/features/auth/pages/signin_page.dart';
+import 'package:shop_app/features/auth/pages/signup_page.dart';
+import 'package:shop_app/features/auth/pages/splash_page.dart';
+import 'package:shop_app/features/cart/pages/cart_page.dart';
+import 'package:shop_app/features/product/pages/detailpage.dart';
+import 'package:shop_app/features/product/pages/home_page.dart';
+import 'package:shop_app/features/product/pages/notifications.dart';
+import 'package:shop_app/features/product/pages/profile_page.dart';
+
 import 'package:shop_app/routes/navigationbar.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -18,6 +20,8 @@ final GoRouter appRouter = GoRouter(
     GoRoute(path: '/signin', builder: (context, state) => const Signinpage()),
     GoRoute(path: '/signup', builder: (context, state) => const Signuppage()),
     GoRoute(path: '/forgot', builder: (context, state) => const ForgotPage()),
+    GoRoute(path: '/splash', builder: (context, state) => const SplashPage()),
+
     // GoRoute(
     //   path: "/manage",
     //   pageBuilder: (context, state) =>
