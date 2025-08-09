@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/features/product/pages/profile_page.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shop_app/features/profile/pages/profile_page.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -68,91 +70,118 @@ class CartPage extends StatelessWidget {
               // Tổng tiền + nút thanh toán
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Số lượng sản phẩm
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Total Items: 5',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          Text(
-                            '\$100.00',
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                
-                      // Phí vận chuyển
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('Shipping Fee'),
-                          Text(
-                            '\$5.00',
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                
-                      // Thuế
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('Tax (10%)'),
-                          Text(
-                            '\$10.00',
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ],
-                      ),
-                      const Divider(height: 20),
-                
-                      // Tổng cộng
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Total Payment',
-                            style: Theme.of(context).textTheme.titleLarge
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            '\$115.00',
-                            style: Theme.of(context).textTheme.titleLarge
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                child: BillingDetails(
+                  totalItems: 5,
+                  itemsPrice: 100.0,
+                  shippingFee: 5.0,
+                  tax: 10.0,
                 ),
               ),
 
               const SizedBox(height: 12),
               MainButton(
                 onPressed: () {
-                  // Handle checkout action
+                  context.push("/checkout");
                 },
                 text: 'Checkout',
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class BillingDetails extends StatelessWidget {
+  final int totalItems;
+  final double itemsPrice;
+  final double shippingFee;
+  final double tax;
+
+  const BillingDetails({
+    super.key,
+    required this.totalItems,
+    required this.itemsPrice,
+    required this.shippingFee,
+    required this.tax,
+  });
+
+  double get totalPayment => itemsPrice + shippingFee + tax;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Số lượng sản phẩm
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Total Items: $totalItems',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(
+                '\$${itemsPrice.toStringAsFixed(2)}',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Phí vận chuyển
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Shipping Fee'),
+              Text(
+                '\$${shippingFee.toStringAsFixed(2)}',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Thuế
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Tax (10%)'),
+              Text(
+                '\$${tax.toStringAsFixed(2)}',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
+          ),
+          const Divider(height: 20),
+
+          // Tổng cộng
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Total Payment',
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '\$${totalPayment.toStringAsFixed(2)}',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

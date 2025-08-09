@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shop_app/data/datasources/remote/apiservice.dart';
 import 'package:shop_app/data/models/product_model.dart';
-import 'package:shop_app/features/product/pages/profile_page.dart';
+import 'package:shop_app/features/profile/pages/profile_page.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key, required this.productId});
@@ -20,7 +21,7 @@ class _DetailPageState extends State<DetailPage> {
         backgroundColor: Colors.transparent,
         leading: BackBind(
           onPressed: () {
-            Navigator.of(context).pop();
+            context.pop();
           },
         ),
       ),
@@ -80,13 +81,42 @@ class _DetailPageState extends State<DetailPage> {
 
                     // Danh sách Review
                     ListView.builder(
-                      padding: EdgeInsets.zero, 
+                      padding: EdgeInsets.zero,
                       itemCount: 5,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return const ReviewItem();
                       },
+                    ),
+
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Recommends",
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 250,
+                      child: ListView.builder(
+                        itemCount: 10,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                              width: 250,
+                              color: Colors.amberAccent,
+                              child: Text("$index"),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),

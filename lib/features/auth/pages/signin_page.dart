@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop_app/core/components/text_field_app.dart';
-import 'package:shop_app/features/product/pages/profile_page.dart';
+import 'package:shop_app/features/profile/pages/profile_page.dart';
 
 class Signinpage extends StatelessWidget {
   const Signinpage({super.key});

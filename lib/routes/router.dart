@@ -6,10 +6,13 @@ import 'package:shop_app/features/auth/pages/signin_page.dart';
 import 'package:shop_app/features/auth/pages/signup_page.dart';
 import 'package:shop_app/features/auth/pages/splash_page.dart';
 import 'package:shop_app/features/cart/pages/cart_page.dart';
+import 'package:shop_app/features/order/pages/confirmation.dart';
+import 'package:shop_app/features/order/pages/checkout.dart';
 import 'package:shop_app/features/product/pages/detailpage.dart';
 import 'package:shop_app/features/product/pages/home_page.dart';
-import 'package:shop_app/features/product/pages/notifications.dart';
-import 'package:shop_app/features/product/pages/profile_page.dart';
+import 'package:shop_app/features/product/pages/category.dart';
+import 'package:shop_app/features/profile/pages/profile_detail.dart';
+import 'package:shop_app/features/profile/pages/profile_page.dart';
 
 import 'package:shop_app/routes/navigationbar.dart';
 
@@ -21,12 +24,20 @@ final GoRouter appRouter = GoRouter(
     GoRoute(path: '/signup', builder: (context, state) => const Signuppage()),
     GoRoute(path: '/forgot', builder: (context, state) => const ForgotPage()),
     GoRoute(path: '/splash', builder: (context, state) => const SplashPage()),
-
-    // GoRoute(
-    //   path: "/manage",
-    //   pageBuilder: (context, state) =>
-    //       buildFadePage(child: const ManageScreen()),
-    // ),
+    GoRoute(
+      path: '/profile/detail',
+      builder: (context, state) => const ProfileDetail(),
+    ),
+    GoRoute(
+      path: "/checkout",
+      pageBuilder: (context, state) =>
+          buildFadePage(child: const CheckoutPage()),
+    ),
+    GoRoute(
+      path: "/confirmation",
+      pageBuilder: (context, state) =>
+          buildFadePage(child: const ConfirmationPage()),
+    ),
 
     // GoRoute(
     //   path: "/manage/add",
@@ -38,10 +49,8 @@ final GoRouter appRouter = GoRouter(
       path: "/home/detail/:id",
       pageBuilder: (context, state) {
         final productId = int.parse(state.pathParameters['id']!);
-        return buildFadePage(
-          child: DetailPage(productId: productId),
-        );
-      }     
+        return buildFadePage(child: DetailPage(productId: productId));
+      },
     ),
 
     /// ShellRoute chứa NavigationBar
@@ -63,15 +72,15 @@ final GoRouter appRouter = GoRouter(
         ),
 
         GoRoute(
-          path: '/label',
+          path: '/cart',
           pageBuilder: (context, state) =>
               buildFadePage(child: const CartPage()),
         ),
 
         GoRoute(
-          path: '/notification',
+          path: '/category',
           pageBuilder: (context, state) =>
-              buildFadePage(child: const NotificationsPage()),
+              buildFadePage(child: const CategoryPage()),
         ),
       ],
     ),

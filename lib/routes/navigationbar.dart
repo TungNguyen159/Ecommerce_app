@@ -10,8 +10,8 @@ class MainScreen extends StatelessWidget {
 
   static const List<String> routes = [
     '/home',
-    '/label',
-    '/notification',
+    '/category',
+    '/cart',
     '/profile',
   ];
 
@@ -36,8 +36,8 @@ class MainScreen extends StatelessWidget {
             final isActive = currentIndex == index;
             final iconData = [
               Icons.home,
-              Icons.label,
-              Icons.notifications,
+              Icons.category,
+              Icons.leave_bags_at_home,
               Icons.person,
             ][index];
 

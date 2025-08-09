@@ -101,7 +101,10 @@ class _HomepageState extends State<Homepage> {
                   },
                 ),
               ),
-               const SizedBox(height: 20),
+              const SizedBox(height: 20),
+              Banneritem(),
+              Banneritem(),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -144,6 +147,80 @@ class _HomepageState extends State<Homepage> {
                       );
                     }
                   },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Banneritem extends StatelessWidget {
+  const Banneritem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        print("Ad Banner Clicked");
+      },
+      child: Container(
+        height: 200,
+       
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              // Ảnh nền
+              Image.network(
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLpPJnSHrI6Bhm9TnhplVLmWQoHdAq8NbhjA&s',
+                fit: BoxFit.cover,
+              ),
+
+              // Overlay làm tối nhẹ ảnh để dễ đọc chữ
+              Container(color: Colors.black.withOpacity(0.4)),
+
+              // Nội dung trên ảnh
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Text
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Summer Sale!',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Up to 50% off selected items',
+                          style: TextStyle(color: Colors.white70, fontSize: 16),
+                        ),
+                      ],
+                    ),
+
+                    // Icon hoặc CTA
+                    const Icon(Icons.arrow_forward_ios, color: Colors.white),
+                  ],
                 ),
               ),
             ],
@@ -271,8 +348,9 @@ class ProductItem extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
           onTap: () {
-         
-           context.push('/home/detail/${product.id}'); // Navigate to detail page
+            context.push(
+              '/home/detail/${product.id}',
+            ); // Navigate to detail page
           },
           child: Padding(
             padding: const EdgeInsets.all(10),
